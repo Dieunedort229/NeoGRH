@@ -20,7 +20,10 @@ return new class extends Migration
 
             // Informations professionnelles
             $table->string('fonction')->nullable()->after('phone'); 
-            $table->enum('department', ['Technique','Ressources Humaines','Finance'])->nullable()->after('fonction');
+            $table->string('matricule')->nullable()->after('fonction');
+            $table->string('prestation_type')->nullable()->after('matricule');
+            $table->string('entreprise')->nullable()->after('prestation_type');
+            $table->enum('department', ['Technique','Ressources Humaines','Finance'])->nullable()->after('entreprise');
             $table->date('hire_date')->nullable()->after('department');
             $table->enum('contract_type', ['CDI','CDD','Stage'])->nullable()->after('hire_date');
         });
@@ -32,11 +35,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn([
-                    'gender','birth_date','address','phone',
-                    'fonction','department','hire_date','contract_type'
-                ]);
-        });
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn([
+            'gender','birth_date','address','phone',
+            'fonction','matricule','prestation_type','entreprise','department','hire_date','contract_type'
+        ]);
+    });
     }
 };

@@ -4,27 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Accueil') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('projets.index')" :active="request()->routeIs('projets.*')">
-                        {{ __('Projets') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('personnel.index')" :active="request()->routeIs('personnel.*')">
-                        {{ __('Personnel') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('prestataires.index')" :active="request()->routeIs('prestataires.*')">
-                        {{ __('Prestataires') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('banques.index')" :active="request()->routeIs('banques.*')">
-                        {{ __('Banques') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('partenaires.index')" :active="request()->routeIs('partenaires.*')">
-                        {{ __('Partenaires') }}
-                    </x-nav-link>
-                </div>
+                <!-- Navigation Links supprimés, voir sidebar -->
             </div>
 
             <!-- Settings Dropdown -->
@@ -32,7 +12,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>@if(Auth::check())
+                                    {{ Auth::user()->name }}
+                                 @else
+                                     Invité
+                                 @endif
+                            </div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -99,8 +84,21 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                    @if(Auth::check())
+                        {{ Auth::user()->name }}
+                    @else
+                        Invité
+                    @endif
+                </div>
+                <div class="font-medium text-sm text-gray-500">
+                    @if(Auth::check())
+                        {{ Auth::user()->email }}
+                    @else
+                        Invité
+                    @endif  
+
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">

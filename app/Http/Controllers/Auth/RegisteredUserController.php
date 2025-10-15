@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -38,6 +39,9 @@ class RegisteredUserController extends Controller
             'address' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:20'],
             'fonction' => ['nullable', 'string', 'max:100'],
+            'matricule' => ['nullable', 'string', 'max:50'],
+            'prestation_type' => ['nullable', 'string', 'max:100'],
+            'entreprise' => ['nullable', 'string', 'max:100'],
             'department' => ['nullable', 'string', 'in:Technique,Ressources Humaines,Finance'],
             'hire_date' => ['nullable', 'date'],
             'contract_type' => ['nullable', 'string', 'in:CDI,CDD,Stage'],
@@ -53,6 +57,9 @@ class RegisteredUserController extends Controller
             'address' => $request->address,
             'phone' => $request->phone,
             'fonction' => $request->fonction,
+            'matricule' => $request->matricule,
+            'prestation_type' => $request->prestation_type,
+            'entreprise' => $request->entreprise,
             'department' => $request->department,
             'hire_date' => $request->hire_date,
             'contract_type' => $request->contract_type,
@@ -64,6 +71,36 @@ class RegisteredUserController extends Controller
             $user->$key = $value;
         }
         $user->save();
+
+        // Attribution du rôle en fonction de la fonction
+        $fonction = $request->fonction;
+
+        switch($fonction){
+            case 'Personnel':
+            case 'Prestataire':
+                $role = Role::where('name', 'Editeur')->first();
+                break;
+
+            case 'Partenaire':
+                $role = Role::where('name', 'Moniteur')->first();
+                break;
+            
+            case 'Admin': // Création admin
+                
+                $role = Role::where('name','Admin')->first();
+                break;
+            case 'SuperAdmin': // Création super admin 
+                $role = Role::where('name','SuperAdmin')->first();
+                break;
+
+            default:
+                $role = null;
+        }
+
+        if ($role) {
+            $user->roles()->attach($role);
+        }
+
 
         event(new Registered($user));
 

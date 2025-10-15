@@ -26,6 +26,9 @@ class User extends Authenticatable
         'address',
         'phone',
         'fonction',
+        'matricule',
+        'prestation_type',
+        'entreprise',
         'department',
         'hire_date',
         'contract_type',
@@ -53,4 +56,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
+
 }

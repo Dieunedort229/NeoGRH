@@ -12,7 +12,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/projets', [App\Http\Controllers\ProjetController::class, 'index'])->name('projets.index');
+    Route::get('/projets/create', [App\Http\Controllers\ProjetController::class, 'create'])->name('projets.create');
     Route::get('/personnel', [App\Http\Controllers\PersonnelController::class, 'index'])->name('personnel.index');
+    Route::get('/personnel/create', [App\Http\Controllers\PersonnelController::class, 'create'])->name('personnel.create');
     Route::get('/prestataires', [App\Http\Controllers\PrestataireController::class, 'index'])->name('prestataires.index');
     Route::get('/banques', [App\Http\Controllers\BanqueController::class, 'index'])->name('banques.index');
     Route::get('/partenaires', [App\Http\Controllers\PartenaireController::class, 'index'])->name('partenaires.index');
