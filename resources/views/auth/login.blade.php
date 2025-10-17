@@ -49,13 +49,6 @@
             </x-primary-button>
         </div>
         
-        <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Pas encore de compte?') }}
-                <a href="{{ route('register') }}" class="font-medium text-primary hover:text-primary/80">
-                    {{ __('Inscrivez-vous') }}
-                </a>
-            </p>
-        </div>
+        {{-- Public registration disabled. Accounts are created by administrators. --}}
     </form>
 </x-guest-layout>

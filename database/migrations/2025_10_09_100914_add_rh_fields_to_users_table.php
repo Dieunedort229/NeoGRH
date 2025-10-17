@@ -13,19 +13,41 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Informations personnelles
-            $table->enum('gender', ['Homme','Femme'])->nullable()->after('name');
-            $table->date('birth_date')->nullable()->after('gender');
-            $table->string('address')->nullable()->after('birth_date');
-            $table->string('phone')->nullable()->after('address');
+            if (! Schema::hasColumn('users', 'gender')) {
+                $table->enum('gender', ['Homme','Femme'])->nullable()->after('name');
+            }
+            if (! Schema::hasColumn('users', 'birth_date')) {
+                $table->date('birth_date')->nullable()->after('gender');
+            }
+            if (! Schema::hasColumn('users', 'address')) {
+                $table->string('address')->nullable()->after('birth_date');
+            }
+            if (! Schema::hasColumn('users', 'phone')) {
+                $table->string('phone')->nullable()->after('address');
+            }
 
             // Informations professionnelles
-            $table->string('fonction')->nullable()->after('phone'); 
-            $table->string('matricule')->nullable()->after('fonction');
-            $table->string('prestation_type')->nullable()->after('matricule');
-            $table->string('entreprise')->nullable()->after('prestation_type');
-            $table->enum('department', ['Technique','Ressources Humaines','Finance'])->nullable()->after('entreprise');
-            $table->date('hire_date')->nullable()->after('department');
-            $table->enum('contract_type', ['CDI','CDD','Stage'])->nullable()->after('hire_date');
+            if (! Schema::hasColumn('users', 'fonction')) {
+                $table->string('fonction')->nullable()->after('phone');
+            }
+            if (! Schema::hasColumn('users', 'matricule')) {
+                $table->string('matricule')->nullable()->after('fonction');
+            }
+            if (! Schema::hasColumn('users', 'prestation_type')) {
+                $table->string('prestation_type')->nullable()->after('matricule');
+            }
+            if (! Schema::hasColumn('users', 'entreprise')) {
+                $table->string('entreprise')->nullable()->after('prestation_type');
+            }
+            if (! Schema::hasColumn('users', 'department')) {
+                $table->enum('department', ['Technique','Ressources Humaines','Finance'])->nullable()->after('entreprise');
+            }
+            if (! Schema::hasColumn('users', 'hire_date')) {
+                $table->date('hire_date')->nullable()->after('department');
+            }
+            if (! Schema::hasColumn('users', 'contract_type')) {
+                $table->enum('contract_type', ['CDI','CDD','Stage'])->nullable()->after('hire_date');
+            }
         });
 
     }

@@ -28,11 +28,7 @@
                                 Connexion
                             </a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-md transition-colors">
-                                    Inscription
-                                </a>
-                            @endif
+                            {{-- Inscription publique désactivée. Les comptes sont créés par l'administrateur. --}}
                         @endauth
                     </div>
                 </nav>
@@ -58,9 +54,7 @@
                             <a href="{{ route('login') }}" class="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-md text-center transition-colors">
                                 Connexion
                             </a>
-                            <a href="{{ route('register') }}" class="w-full sm:w-auto px-8 py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-md text-center transition-colors">
-                                Inscription
-                            </a>
+                            {{-- Inscription publique désactivée. --}}
                         </div>
                     </div>
                 @endauth

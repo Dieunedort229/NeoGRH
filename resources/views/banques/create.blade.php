@@ -1,0 +1,261 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <i class="fas fa-university mr-2"></i>{{ __('Nouveau Compte Bancaire') }}
+            </h2>
+            <a href="{{ route('banques.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-300 transform hover:scale-105">
+                <i class="fas fa-arrow-left mr-2"></i>Retour à la liste
+            </a>
+        </div>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl rounded-lg">
+                <div class="p-8 text-gray-900">
+                    <form action="{{ route('banques.store') }}" method="POST" class="space-y-6">
+                        @csrf
+                        
+                        <!-- Informations de la banque -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                                <i class="fas fa-university mr-2 text-blue-600"></i>Informations de la banque
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-building mr-1"></i>Nom de la banque *
+                                    </label>
+                                    <input type="text" name="nom" id="nom" value="{{ old('nom') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: BMCE Bank" required>
+                                    @error('nom')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="code_banque" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-code mr-1"></i>Code banque
+                                    </label>
+                                    <input type="text" name="code_banque" id="code_banque" value="{{ old('code_banque') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: BMCEMAMC">
+                                    @error('code_banque')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div class="col-span-2">
+                                    <label for="adresse" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>Adresse de l'agence
+                                    </label>
+                                    <textarea name="adresse" id="adresse" rows="3" 
+                                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                              placeholder="Adresse complète de l'agence...">{{ old('adresse') }}</textarea>
+                                    @error('adresse')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="ville" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-city mr-1"></i>Ville
+                                    </label>
+                                    <input type="text" name="ville" id="ville" value="{{ old('ville') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: Casablanca">
+                                    @error('ville')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="pays" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-flag mr-1"></i>Pays
+                                    </label>
+                                    <input type="text" name="pays" id="pays" value="{{ old('pays') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: Maroc">
+                                    @error('pays')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Informations du compte -->
+                        <div class="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                                <i class="fas fa-credit-card mr-2 text-green-600"></i>Informations du compte
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="numero_compte" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-hashtag mr-1"></i>Numéro de compte *
+                                    </label>
+                                    <input type="text" name="numero_compte" id="numero_compte" value="{{ old('numero_compte') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: 123456789012" required>
+                                    @error('numero_compte')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="type_compte" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-tags mr-1"></i>Type de compte *
+                                    </label>
+                                    <select name="type_compte" id="type_compte" 
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Courant" {{ old('type_compte') === 'Courant' ? 'selected' : '' }}>Courant</option>
+                                        <option value="Épargne" {{ old('type_compte') === 'Épargne' ? 'selected' : '' }}>Épargne</option>
+                                        <option value="Projet" {{ old('type_compte') === 'Projet' ? 'selected' : '' }}>Projet</option>
+                                        <option value="Investissement" {{ old('type_compte') === 'Investissement' ? 'selected' : '' }}>Investissement</option>
+                                    </select>
+                                    @error('type_compte')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="iban" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-barcode mr-1"></i>IBAN
+                                    </label>
+                                    <input type="text" name="iban" id="iban" value="{{ old('iban') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: MA64011519000001205000534921">
+                                    @error('iban')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="swift_bic" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-globe mr-1"></i>SWIFT/BIC
+                                    </label>
+                                    <input type="text" name="swift_bic" id="swift_bic" value="{{ old('swift_bic') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: BMCEMAMC">
+                                    @error('swift_bic')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="devise" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-coins mr-1"></i>Devise *
+                                    </label>
+                                    <select name="devise" id="devise" 
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="MAD" {{ old('devise') === 'MAD' ? 'selected' : '' }}>MAD (Dirham)</option>
+                                        <option value="FCFA" {{ old('devise') === 'FCFA' ? 'selected' : '' }}>FCFA</option>
+                                        <option value="USD" {{ old('devise') === 'USD' ? 'selected' : '' }}>USD</option>
+                                        <option value="EUR" {{ old('devise') === 'EUR' ? 'selected' : '' }}>EUR</option>
+                                    </select>
+                                    @error('devise')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="statut" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-toggle-on mr-1"></i>Statut *
+                                    </label>
+                                    <select name="statut" id="statut" 
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Actif" {{ old('statut') === 'Actif' ? 'selected' : '' }}>Actif</option>
+                                        <option value="Inactif" {{ old('statut') === 'Inactif' ? 'selected' : '' }}>Inactif</option>
+                                        <option value="Fermé" {{ old('statut') === 'Fermé' ? 'selected' : '' }}>Fermé</option>
+                                    </select>
+                                    @error('statut')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="solde_initial" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-dollar-sign mr-1"></i>Solde initial *
+                                    </label>
+                                    <input type="number" name="solde_initial" id="solde_initial" value="{{ old('solde_initial') }}" 
+                                           step="0.01" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" 
+                                           placeholder="0.00" required>
+                                    @error('solde_initial')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="solde_actuel" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-wallet mr-1"></i>Solde actuel *
+                                    </label>
+                                    <input type="number" name="solde_actuel" id="solde_actuel" value="{{ old('solde_actuel') }}" 
+                                           step="0.01" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200" 
+                                           placeholder="0.00" required>
+                                    @error('solde_actuel')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact gestionnaire -->
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                                <i class="fas fa-user-tie mr-2 text-purple-600"></i>Contact gestionnaire
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label for="contact_nom" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-user mr-1"></i>Nom du gestionnaire
+                                    </label>
+                                    <input type="text" name="contact_nom" id="contact_nom" value="{{ old('contact_nom') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200" 
+                                           placeholder="Ex: Ahmed Alami">
+                                    @error('contact_nom')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="contact_email" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-envelope mr-1"></i>Email
+                                    </label>
+                                    <input type="email" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200" 
+                                           placeholder="gestionnaire@banque.com">
+                                    @error('contact_email')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+
+                                <div>
+                                    <label for="contact_telephone" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-phone mr-1"></i>Téléphone
+                                    </label>
+                                    <input type="text" name="contact_telephone" id="contact_telephone" value="{{ old('contact_telephone') }}" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200" 
+                                           placeholder="+212 6 XX XX XX XX">
+                                    @error('contact_telephone')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div>
+                            <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-sticky-note mr-1"></i>Notes
+                            </label>
+                            <textarea name="notes" id="notes" rows="4" 
+                                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" 
+                                      placeholder="Informations supplémentaires...">{{ old('notes') }}</textarea>
+                            @error('notes')<span class="text-red-500 text-sm mt-1 block"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</span>@enderror
+                        </div>
+
+                        <!-- Boutons d'action -->
+                        <div class="flex justify-end space-x-4 pt-6">
+                            <a href="{{ route('banques.index') }}" 
+                               class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg transition duration-300 transform hover:scale-105">
+                                <i class="fas fa-times mr-2"></i>Annuler
+                            </a>
+                            <button type="submit" 
+                                    class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-save mr-2"></i>Enregistrer le compte
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour copier le solde initial vers le solde actuel -->
+    <script>
+        document.getElementById('solde_initial').addEventListener('input', function() {
+            const soldeInitial = this.value;
+            const soldeActuel = document.getElementById('solde_actuel');
+            if (soldeActuel.value === '' || soldeActuel.value === '0') {
+                soldeActuel.value = soldeInitial;
+            }
+        });
+    </script>
+</x-app-layout>

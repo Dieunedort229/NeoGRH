@@ -1,13 +1,135 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Nouveau Projet') }}
+            </h2>
+            <a href="{{ route('projets.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Retour à la liste
+            </a>
+        </div>
+    </x-slot>
 
-@section('content')
-<div class="max-w-2xl mx-auto mt-10 bg-white dark:bg-gray-800 p-8 rounded-lg shadow">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Créer un projet</h2>
-    <div class="text-gray-600 dark:text-gray-400 mb-6">
-        Cette page permet de créer un nouveau projet. Aucun champ n'est affiché pour l'instant.
-        <br>
-        <span class="italic">(Formulaire à compléter selon vos besoins)</span>
+    <div class="py-12">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <form action="{{ route('projets.store') }}" method="POST">
+                        @csrf
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="col-span-2">
+                                <label for="nom" class="block text-sm font-medium text-gray-700">Nom du projet *</label>
+                                <input type="text" name="nom" id="nom" value="{{ old('nom') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                @error('nom')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="description" class="block text-sm font-medium text-gray-700">Description *</label>
+                                <textarea name="description" id="description" rows="4" 
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>{{ old('description') }}</textarea>
+                                @error('description')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="budget" class="block text-sm font-medium text-gray-700">Budget *</label>
+                                <input type="number" name="budget" id="budget" value="{{ old('budget') }}" step="0.01" min="0"
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                @error('budget')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="devise" class="block text-sm font-medium text-gray-700">Devise *</label>
+                                <select name="devise" id="devise" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                    <option value="">Sélectionner...</option>
+                                    <option value="FCFA" {{ old('devise') === 'FCFA' ? 'selected' : '' }}>FCFA</option>
+                                    <option value="USD" {{ old('devise') === 'USD' ? 'selected' : '' }}>USD</option>
+                                    <option value="EUR" {{ old('devise') === 'EUR' ? 'selected' : '' }}>EUR</option>
+                                </select>
+                                @error('devise')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="date_debut" class="block text-sm font-medium text-gray-700">Date de début *</label>
+                                <input type="date" name="date_debut" id="date_debut" value="{{ old('date_debut') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                @error('date_debut')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="date_fin" class="block text-sm font-medium text-gray-700">Date de fin</label>
+                                <input type="date" name="date_fin" id="date_fin" value="{{ old('date_fin') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('date_fin')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="statut" class="block text-sm font-medium text-gray-700">Statut *</label>
+                                <select name="statut" id="statut" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                    <option value="">Sélectionner...</option>
+                                    <option value="Planifié" {{ old('statut') === 'Planifié' ? 'selected' : '' }}>Planifié</option>
+                                    <option value="En cours" {{ old('statut') === 'En cours' ? 'selected' : '' }}>En cours</option>
+                                    <option value="Terminé" {{ old('statut') === 'Terminé' ? 'selected' : '' }}>Terminé</option>
+                                    <option value="Suspendu" {{ old('statut') === 'Suspendu' ? 'selected' : '' }}>Suspendu</option>
+                                </select>
+                                @error('statut')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="responsable" class="block text-sm font-medium text-gray-700">Responsable *</label>
+                                <input type="text" name="responsable" id="responsable" value="{{ old('responsable') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                @error('responsable')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="bailleur" class="block text-sm font-medium text-gray-700">Bailleur</label>
+                                <input type="text" name="bailleur" id="bailleur" value="{{ old('bailleur') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('bailleur')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="localisation" class="block text-sm font-medium text-gray-700">Localisation</label>
+                                <input type="text" name="localisation" id="localisation" value="{{ old('localisation') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('localisation')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="beneficiaires" class="block text-sm font-medium text-gray-700">Nombre de bénéficiaires</label>
+                                <input type="number" name="beneficiaires" id="beneficiaires" value="{{ old('beneficiaires') }}" min="0"
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('beneficiaires')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="objectifs" class="block text-sm font-medium text-gray-700">Objectifs</label>
+                                <textarea name="objectifs" id="objectifs" rows="3" 
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('objectifs') }}</textarea>
+                                @error('objectifs')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                                <textarea name="notes" id="notes" rows="3" 
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('notes') }}</textarea>
+                                @error('notes')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <a href="{{ route('projets.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                                Annuler
+                            </a>
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Créer le projet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="{{ route('projets.index') }}" class="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition">Retour à la liste des projets</a>
-</div>
-@endsection
+</x-app-layout>

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+    <form method="POST" action="{{ route('admin.register.store') }}" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
         @csrf
 
         <div class="mb-6 text-center">

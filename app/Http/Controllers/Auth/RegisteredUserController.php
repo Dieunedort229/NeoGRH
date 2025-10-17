@@ -104,8 +104,14 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // If the request was made by an authenticated user (admin creating another user),
+        // do not log in the newly created user. Otherwise (public registration), log them in.
+        if (! $request->user()) {
+            Auth::login($user);
+            return redirect(route('dashboard', absolute: false));
+        }
 
-        return redirect(route('dashboard', absolute: false));
+        // Admin-created user: redirect back to admin area or previous page
+        return redirect()->back()->with('status', 'Utilisateur créé avec succès.');
     }
 }

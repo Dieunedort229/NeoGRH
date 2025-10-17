@@ -1,5 +1,5 @@
 
-<aside class="w-64 h-screen bg-gradient-to-b from-primary to-blue-900 dark:from-gray-900 dark:to-gray-800 shadow-lg flex flex-col">
+<aside class="fixed left-0 top-0 w-64 h-full bg-gradient-to-b from-primary to-blue-900 dark:from-gray-900 dark:to-gray-800 shadow-lg flex flex-col z-10 overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
     <div class="flex items-center justify-center h-20">
         <span class="text-2xl font-bold text-white tracking-wide">NeoGRH</span>
     </div>

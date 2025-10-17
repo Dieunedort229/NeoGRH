@@ -112,4 +112,26 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Registration
+    |--------------------------------------------------------------------------
+    |
+    | When set to true, the public registration routes will be enabled. Keep
+    | this to false for production so only admins can create users.
+    |
+    */
+    'allow_registration' => env('AUTH_ALLOW_REGISTRATION', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | SuperAdmin Role Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The ID of the SuperAdmin role in the database. Using ID is more secure
+    | than using role name as it cannot be easily modified by users.
+    |
+    */
+    'superadmin_role_id' => env('SUPERADMIN_ROLE_ID', 1),
+
 ];
