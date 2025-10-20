@@ -23,22 +23,15 @@ class BanqueController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required|string|max:255',
-            'code_banque' => 'nullable|string|max:50',
-            'adresse' => 'nullable|string',
-            'ville' => 'nullable|string|max:255',
-            'pays' => 'nullable|string|max:255',
-            'contact_nom' => 'nullable|string|max:255',
-            'contact_email' => 'nullable|email',
-            'contact_telephone' => 'nullable|string|max:20',
+            'nom_banque' => 'required|string|max:255',
+            'numero_compte' => 'required|string|unique:banques,numero_compte|max:255',
             'type_compte' => 'required|in:Courant,Épargne,Projet,Investissement',
-            'numero_compte' => 'required|string|unique:banques,numero_compte|max:50',
-            'iban' => 'nullable|string|max:50',
-            'swift_bic' => 'nullable|string|max:20',
             'devise' => 'required|string|max:10',
-            'solde_initial' => 'required|numeric',
-            'solde_actuel' => 'required|numeric',
-            'statut' => 'required|in:Actif,Inactif,Fermé',
+            'solde_initial' => 'required|numeric|min:0',
+            'responsable_compte' => 'nullable|string|max:255',
+            'contact_banque' => 'nullable|string|max:255',
+            'adresse_banque' => 'nullable|string',
+            'statut' => 'required|in:Actif,Fermé,Suspendu',
             'notes' => 'nullable|string'
         ]);
 
@@ -48,7 +41,10 @@ class BanqueController extends Controller
                 ->withInput();
         }
 
-        Banque::create($request->all());
+        $data = $request->all();
+        $data['solde_actuel'] = $data['solde_initial']; // Set initial balance as current balance
+        
+        Banque::create($data);
 
         return redirect()->route('banques.index')
             ->with('success', 'Compte bancaire ajouté avec succès.');
@@ -67,22 +63,15 @@ class BanqueController extends Controller
     public function update(Request $request, Banque $banque)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required|string|max:255',
-            'code_banque' => 'nullable|string|max:50',
-            'adresse' => 'nullable|string',
-            'ville' => 'nullable|string|max:255',
-            'pays' => 'nullable|string|max:255',
-            'contact_nom' => 'nullable|string|max:255',
-            'contact_email' => 'nullable|email',
-            'contact_telephone' => 'nullable|string|max:20',
+            'nom_banque' => 'required|string|max:255',
+            'numero_compte' => 'required|string|max:255|unique:banques,numero_compte,' . $banque->id,
             'type_compte' => 'required|in:Courant,Épargne,Projet,Investissement',
-            'numero_compte' => 'required|string|max:50|unique:banques,numero_compte,' . $banque->id,
-            'iban' => 'nullable|string|max:50',
-            'swift_bic' => 'nullable|string|max:20',
             'devise' => 'required|string|max:10',
-            'solde_initial' => 'required|numeric',
-            'solde_actuel' => 'required|numeric',
-            'statut' => 'required|in:Actif,Inactif,Fermé',
+            'solde_initial' => 'required|numeric|min:0',
+            'responsable_compte' => 'nullable|string|max:255',
+            'contact_banque' => 'nullable|string|max:255',
+            'adresse_banque' => 'nullable|string',
+            'statut' => 'required|in:Actif,Fermé,Suspendu',
             'notes' => 'nullable|string'
         ]);
 

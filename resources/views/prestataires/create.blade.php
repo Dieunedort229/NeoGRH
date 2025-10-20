@@ -23,81 +23,63 @@
                             </div>
                             
                             <div>
-                                <label for="nom" class="block text-sm font-medium text-gray-700">Nom du prestataire *</label>
+                                <label for="nom" class="block text-sm font-medium text-gray-700">Nom *</label>
                                 <input type="text" name="nom" id="nom" value="{{ old('nom') }}" 
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
                                 @error('nom')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="type_service" class="block text-sm font-medium text-gray-700">Type de service *</label>
-                                <input type="text" name="type_service" id="type_service" value="{{ old('type_service') }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('type_service')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div class="col-span-2">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4 mt-6">Contact principal</h3>
+                                <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom</label>
+                                <input type="text" name="prenom" id="prenom" value="{{ old('prenom') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('prenom')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="contact_nom" class="block text-sm font-medium text-gray-700">Nom du contact *</label>
-                                <input type="text" name="contact_nom" id="contact_nom" value="{{ old('contact_nom') }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('contact_nom')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                <label for="entreprise" class="block text-sm font-medium text-gray-700">Entreprise</label>
+                                <input type="text" name="entreprise" id="entreprise" value="{{ old('entreprise') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('entreprise')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="contact_telephone" class="block text-sm font-medium text-gray-700">Téléphone *</label>
-                                <input type="text" name="contact_telephone" id="contact_telephone" value="{{ old('contact_telephone') }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('contact_telephone')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div class="col-span-2">
-                                <label for="contact_email" class="block text-sm font-medium text-gray-700">Email *</label>
-                                <input type="email" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('contact_email')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div class="col-span-2">
-                                <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse *</label>
-                                <textarea name="adresse" id="adresse" rows="3" 
-                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>{{ old('adresse') }}</textarea>
-                                @error('adresse')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('email')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="ville" class="block text-sm font-medium text-gray-700">Ville *</label>
-                                <input type="text" name="ville" id="ville" value="{{ old('ville') }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('ville')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                <label for="telephone" class="block text-sm font-medium text-gray-700">Téléphone</label>
+                                <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('telephone')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="pays" class="block text-sm font-medium text-gray-700">Pays *</label>
-                                <input type="text" name="pays" id="pays" value="{{ old('pays') }}" 
+                                <label for="specialite" class="block text-sm font-medium text-gray-700">Spécialité *</label>
+                                <input type="text" name="specialite" id="specialite" value="{{ old('specialite') }}" 
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('pays')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                @error('specialite')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
-                                <label for="tarif_journalier" class="block text-sm font-medium text-gray-700">Tarif journalier</label>
+                                <label for="type_prestation" class="block text-sm font-medium text-gray-700">Type de prestation *</label>
+                                <select name="type_prestation" id="type_prestation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                    <option value="">Sélectionner...</option>
+                                    <option value="Consultant" {{ old('type_prestation') === 'Consultant' ? 'selected' : '' }}>Consultant</option>
+                                    <option value="Fournisseur" {{ old('type_prestation') === 'Fournisseur' ? 'selected' : '' }}>Fournisseur</option>
+                                    <option value="Service" {{ old('type_prestation') === 'Service' ? 'selected' : '' }}>Service</option>
+                                </select>
+                                @error('type_prestation')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div>
+                                <label for="tarif_journalier" class="block text-sm font-medium text-gray-700">Tarif journalier (€)</label>
                                 <input type="number" name="tarif_journalier" id="tarif_journalier" value="{{ old('tarif_journalier') }}" step="0.01" min="0"
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 @error('tarif_journalier')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div>
-                                <label for="devise" class="block text-sm font-medium text-gray-700">Devise</label>
-                                <select name="devise" id="devise" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="">Sélectionner...</option>
-                                    <option value="FCFA" {{ old('devise') === 'FCFA' ? 'selected' : '' }}>FCFA</option>
-                                    <option value="USD" {{ old('devise') === 'USD' ? 'selected' : '' }}>USD</option>
-                                    <option value="EUR" {{ old('devise') === 'EUR' ? 'selected' : '' }}>EUR</option>
-                                </select>
-                                @error('devise')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
@@ -106,16 +88,30 @@
                                     <option value="">Sélectionner...</option>
                                     <option value="Actif" {{ old('statut') === 'Actif' ? 'selected' : '' }}>Actif</option>
                                     <option value="Inactif" {{ old('statut') === 'Inactif' ? 'selected' : '' }}>Inactif</option>
-                                    <option value="Suspendu" {{ old('statut') === 'Suspendu' ? 'selected' : '' }}>Suspendu</option>
+                                    <option value="Blacklisté" {{ old('statut') === 'Blacklisté' ? 'selected' : '' }}>Blacklisté</option>
                                 </select>
                                 @error('statut')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
+                            <div>
+                                <label for="date_debut_collaboration" class="block text-sm font-medium text-gray-700">Date début collaboration</label>
+                                <input type="date" name="date_debut_collaboration" id="date_debut_collaboration" value="{{ old('date_debut_collaboration') }}" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @error('date_debut_collaboration')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
                             <div class="col-span-2">
-                                <label for="specialite" class="block text-sm font-medium text-gray-700">Spécialité</label>
-                                <textarea name="specialite" id="specialite" rows="3" 
-                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('specialite') }}</textarea>
-                                @error('specialite')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse</label>
+                                <textarea name="adresse" id="adresse" rows="3" 
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('adresse') }}</textarea>
+                                @error('adresse')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="col-span-2">
+                                <label for="competences" class="block text-sm font-medium text-gray-700">Compétences</label>
+                                <textarea name="competences" id="competences" rows="3" 
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('competences') }}</textarea>
+                                @error('competences')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="col-span-2">

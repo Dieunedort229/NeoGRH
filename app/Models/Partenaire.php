@@ -8,27 +8,24 @@ use Carbon\Carbon;
 class Partenaire extends Model
 {
     protected $fillable = [
-        'nom',
+        'nom_organisation',
         'type_partenaire',
-        'secteur_activite',
-        'contact_nom',
-        'contact_email',
-        'contact_telephone',
+        'contact_principal',
+        'email',
+        'telephone',
         'adresse',
-        'ville',
-        'pays',
         'site_web',
-        'date_partenariat',
-        'type_collaboration',
-        'budget_alloue',
-        'devise',
+        'domaine_intervention',
         'statut',
+        'date_debut_partenariat',
+        'date_fin_partenariat',
+        'accords_signes',
         'notes'
     ];
 
     protected $casts = [
-        'date_partenariat' => 'date',
-        'budget_alloue' => 'decimal:2'
+        'date_debut_partenariat' => 'date',
+        'date_fin_partenariat' => 'date'
     ];
 
     public function projets()
@@ -38,14 +35,20 @@ class Partenaire extends Model
 
     public function getDureePartenariatAttribute()
     {
-        if (!$this->date_partenariat) {
+        if (!$this->date_debut_partenariat) {
             return null;
         }
-        return $this->date_partenariat->diffInYears(now());
+        return $this->date_debut_partenariat->diffInYears(now());
     }
 
-    public function getBudgetFormatAttribute()
+    public function getStatutBadgeAttribute()
     {
-        return number_format($this->budget_alloue, 2) . ' ' . $this->devise;
+        $badges = [
+            'Actif' => 'bg-green-100 text-green-800',
+            'Inactif' => 'bg-red-100 text-red-800',
+            'En négociation' => 'bg-yellow-100 text-yellow-800'
+        ];
+        
+        return $badges[$this->statut] ?? 'bg-gray-100 text-gray-800';
     }
 }

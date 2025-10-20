@@ -45,10 +45,16 @@
                                         <i class="fas fa-tag mr-2"></i>Type
                                     </th>
                                     <th class="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
-                                        <i class="fas fa-phone mr-2"></i>Contact
+                                        <i class="fas fa-envelope mr-2"></i>Email
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
+                                        <i class="fas fa-phone mr-2"></i>Téléphone
                                     </th>
                                     <th class="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                                         <i class="fas fa-map-marker-alt mr-2"></i>Localisation
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
+                                        <i class="fas fa-calendar mr-2"></i>Depuis
                                     </th>
                                     <th class="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                                         <i class="fas fa-info-circle mr-2"></i>Statut
@@ -69,9 +75,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">{{ $partenaire->nom }}</div>
-                                                    @if($partenaire->secteur_activite)
-                                                        <div class="text-sm text-gray-500">{{ $partenaire->secteur_activite }}</div>
+                                                    <div class="text-sm font-medium text-gray-900">{{ $partenaire->nom_organisation }}</div>
+                                                    @if($partenaire->domaine_intervention)
+                                                        <div class="text-sm text-gray-500">{{ Str::limit($partenaire->domaine_intervention, 50) }}</div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -81,14 +87,21 @@
                                                 {{ $partenaire->type_partenaire }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ $partenaire->contact_nom }}</div>
-                                            <div class="text-sm text-gray-500">{{ $partenaire->contact_email }}</div>
-                                            <div class="text-sm text-gray-500">{{ $partenaire->contact_telephone }}</div>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $partenaire->email ?? 'Non renseigné' }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $partenaire->telephone ?? 'Non renseigné' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            <div>{{ $partenaire->ville }}</div>
-                                            <div class="text-gray-500">{{ $partenaire->pays }}</div>
+                                            @if($partenaire->adresse)
+                                                <div>{{ Str::limit($partenaire->adresse, 50) }}</div>
+                                            @else
+                                                <div class="text-gray-500">Non renseignée</div>
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $partenaire->date_debut_partenariat ? \Carbon\Carbon::parse($partenaire->date_debut_partenariat)->format('d/m/Y') : 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 

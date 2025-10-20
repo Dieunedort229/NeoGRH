@@ -20,7 +20,6 @@ class EnsureSuperAdmin
         }
 
         // Utiliser l'ID du rôle SuperAdmin depuis la configuration
-        // Plus sécurisé que d'utiliser le nom qui peut être modifié
         $superAdminRoleId = config('auth.superadmin_role_id', 1);
         $isSuper = $user->roles()->where('roles.id', $superAdminRoleId)->exists();
 

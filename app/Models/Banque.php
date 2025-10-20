@@ -7,21 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Banque extends Model
 {
     protected $fillable = [
-        'nom',
-        'code_banque',
-        'adresse',
-        'ville',
-        'pays',
-        'contact_nom',
-        'contact_email',
-        'contact_telephone',
-        'type_compte',
+        'nom_banque',
         'numero_compte',
-        'iban',
-        'swift_bic',
+        'type_compte',
         'devise',
         'solde_initial',
         'solde_actuel',
+        'responsable_compte',
+        'contact_banque',
+        'adresse_banque',
         'statut',
         'notes'
     ];

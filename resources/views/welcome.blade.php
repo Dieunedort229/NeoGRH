@@ -17,7 +17,7 @@
         <header class="w-full p-4 lg:p-6 bg-white/80 backdrop-blur-sm border-b border-primary/20">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-between">
-                    <h1 class="text-2xl font-bold text-primary">NeoGRH</h1>
+                    <h1 class="text-2xl font-bold text-primary">ZEUS</h1>
                     <div class="flex items-center gap-4">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-md transition-colors">
@@ -47,9 +47,6 @@
                     </div>
                 @else
                     <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-8 text-center border border-primary/20">
-                        <h1 class="text-4xl font-bold mb-4 text-primary">NeoGRH</h1>
-                        <p class="text-lg mb-8 text-gray-600">Votre solution moderne de gestion des ressources humaines</p>
-                        
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a href="{{ route('login') }}" class="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-md text-center transition-colors">
                                 Connexion

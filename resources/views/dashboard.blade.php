@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center animate__animated animate__fadeInDown">
             <h2 class="font-semibold text-2xl text-gray-800 leading-tight flex items-center">
-                <i class="fas fa-tachometer-alt mr-3 text-blue-600"></i>{{ __('Tableau de Bord NGO') }}
+                <i class="fas fa-tachometer-alt mr-3 text-blue-600"></i>{{ __('Tableau de Bord') }}
             </h2>
             <div class="flex items-center space-x-4">
                 <div class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg text-sm text-gray-700 flex items-center">
@@ -157,17 +157,6 @@
                     <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-info-circle mr-2 text-blue-500"></i>Aide & Support
                     </h3>
-                    <div class="space-y-3">
-                        <div class="p-3 bg-blue-50 rounded-lg">
-                            <p class="text-sm text-gray-700">💡 Commencez par ajouter votre équipe dans la section Personnel</p>
-                        </div>
-                        <div class="p-3 bg-green-50 rounded-lg">
-                            <p class="text-sm text-gray-700">📋 Créez vos premiers projets pour organiser vos activités</p>
-                        </div>
-                        <div class="p-3 bg-purple-50 rounded-lg">
-                            <p class="text-sm text-gray-700">🤝 Ajoutez vos partenaires pour faciliter la collaboration</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -249,92 +238,9 @@
                 </div>
             </div>
 
-            <!-- Section Budget et Performance -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- Aperçu Budget -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 hover:shadow-3xl transition-all duration-300 transform hover:scale-105 animate__animated animate__fadeInUp animate__delay-1s border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-chart-pie mr-2 text-yellow-500"></i>Aperçu Budget
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Budget Total Projets</span>
-                            <span class="font-bold text-green-600">{{ number_format($stats['budget_total'] ?? 0, 0, ',', ' ') }} DH</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Budget Utilisé</span>
-                            <span class="font-bold text-red-600">{{ number_format($stats['budget_utilise'] ?? 0, 0, ',', ' ') }} DH</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Budget Disponible</span>
-                            <span class="font-bold text-blue-600">{{ number_format(($stats['budget_total'] - $stats['budget_utilise']) ?? 0, 0, ',', ' ') }} DH</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-3">
-                            @php
-                                $percentage = $stats['budget_total'] > 0 ? (($stats['budget_utilise'] / $stats['budget_total']) * 100) : 0;
-                            @endphp
-                            <div class="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-1000" 
-                                 style="width: {{ min($percentage, 100) }}%"></div>
-                        </div>
-                        <div class="text-center text-sm text-gray-600">
-                            {{ number_format($percentage, 1) }}% du budget utilisé
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Aperçu Financier -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 hover:shadow-3xl transition-all duration-300 transform hover:scale-105 animate__animated animate__fadeInUp animate__delay-2s border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-university mr-2 text-green-500"></i>Situation Financière
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Comptes Bancaires</span>
-                            <span class="font-bold text-blue-600">{{ $stats['banques'] ?? 0 }}</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Solde Total</span>
-                            <span class="font-bold text-green-600">{{ number_format($stats['solde_total'] ?? 0, 0, ',', ' ') }} DH</span>
-                        </div>
-                        <div class="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
-                            <div class="flex items-center justify-center">
-                                <i class="fas fa-chart-line text-2xl text-green-600 mr-3"></i>
-                                <div class="text-center">
-                                    <div class="text-sm text-gray-600">Santé Financière</div>
-                                    <div class="font-bold text-green-600">
-                                        @if(($stats['solde_total'] ?? 0) > 100000)
-                                            Excellente
-                                        @elseif(($stats['solde_total'] ?? 0) > 50000)
-                                            Bonne
-                                        @elseif(($stats['solde_total'] ?? 0) > 0)
-                                            Stable
-                                        @else
-                                            À surveiller
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Script pour l'horloge temps réel -->
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('fr-FR', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            document.getElementById('current-time').textContent = timeString;
-        }
-        
-        // Mettre à jour l'heure immédiatement puis toutes les secondes
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
+   
 </x-app-layout>

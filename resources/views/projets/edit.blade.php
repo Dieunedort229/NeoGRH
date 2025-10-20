@@ -34,10 +34,10 @@
                             </div>
 
                             <div>
-                                <label for="budget" class="block text-sm font-medium text-gray-700">Budget *</label>
-                                <input type="number" name="budget" id="budget" value="{{ old('budget', $projet->budget) }}" step="0.01" min="0"
+                                <label for="budget_total" class="block text-sm font-medium text-gray-700">Budget total *</label>
+                                <input type="number" name="budget_total" id="budget_total" value="{{ old('budget_total', $projet->budget_total) }}" step="0.01" min="0"
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                @error('budget')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                                @error('budget_total')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
@@ -45,17 +45,6 @@
                                 <input type="number" name="budget_utilise" id="budget_utilise" value="{{ old('budget_utilise', $projet->budget_utilise) }}" step="0.01" min="0"
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 @error('budget_utilise')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div>
-                                <label for="devise" class="block text-sm font-medium text-gray-700">Devise *</label>
-                                <select name="devise" id="devise" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                                    <option value="">Sélectionner...</option>
-                                    <option value="FCFA" {{ old('devise', $projet->devise) === 'FCFA' ? 'selected' : '' }}>FCFA</option>
-                                    <option value="USD" {{ old('devise', $projet->devise) === 'USD' ? 'selected' : '' }}>USD</option>
-                                    <option value="EUR" {{ old('devise', $projet->devise) === 'EUR' ? 'selected' : '' }}>EUR</option>
-                                </select>
-                                @error('devise')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
                             <div>
@@ -98,32 +87,11 @@
                                 @error('bailleur')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
 
-                            <div>
-                                <label for="localisation" class="block text-sm font-medium text-gray-700">Localisation</label>
-                                <input type="text" name="localisation" id="localisation" value="{{ old('localisation', $projet->localisation) }}" 
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                @error('localisation')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div>
-                                <label for="beneficiaires" class="block text-sm font-medium text-gray-700">Nombre de bénéficiaires</label>
-                                <input type="number" name="beneficiaires" id="beneficiaires" value="{{ old('beneficiaires', $projet->beneficiaires) }}" min="0"
-                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                @error('beneficiaires')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
                             <div class="col-span-2">
                                 <label for="objectifs" class="block text-sm font-medium text-gray-700">Objectifs</label>
                                 <textarea name="objectifs" id="objectifs" rows="3" 
                                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('objectifs', $projet->objectifs) }}</textarea>
                                 @error('objectifs')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div class="col-span-2">
-                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                                <textarea name="notes" id="notes" rows="3" 
-                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('notes', $projet->notes) }}</textarea>
-                                @error('notes')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                             </div>
                         </div>
 

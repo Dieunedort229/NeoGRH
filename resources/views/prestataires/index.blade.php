@@ -39,9 +39,9 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prestataire</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Localisation</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Spécialité</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
@@ -50,41 +50,51 @@
                                 @forelse($prestataires as $prestataire)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ $prestataire->nom }}</div>
-                                            @if($prestataire->specialite)
-                                                <div class="text-sm text-gray-500">{{ $prestataire->specialite }}</div>
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $prestataire->nom }} {{ $prestataire->prenom }}
+                                            </div>
+                                            @if($prestataire->entreprise)
+                                                <div class="text-sm text-gray-500">{{ $prestataire->entreprise }}</div>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ $prestataire->type_service }}</div>
+                                            <div class="text-sm text-gray-900">{{ $prestataire->type_prestation }}</div>
                                             @if($prestataire->tarif_journalier)
                                                 <div class="text-sm text-gray-500">{{ $prestataire->tarif_format }}</div>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ $prestataire->contact_nom }}</div>
-                                            <div class="text-sm text-gray-500">{{ $prestataire->contact_email }}</div>
-                                            <div class="text-sm text-gray-500">{{ $prestataire->contact_telephone }}</div>
+                                            @if($prestataire->email)
+                                                <div class="text-sm text-gray-500">{{ $prestataire->email }}</div>
+                                            @endif
+                                            @if($prestataire->telephone)
+                                                <div class="text-sm text-gray-500">{{ $prestataire->telephone }}</div>
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            <div>{{ $prestataire->ville }}</div>
-                                            <div class="text-gray-500">{{ $prestataire->pays }}</div>
+                                            {{ $prestataire->specialite }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                {{ $prestataire->statut === 'Actif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                {{ $prestataire->statut === 'Actif' ? 'bg-green-100 text-green-800' : 
+                                                   ($prestataire->statut === 'Blacklisté' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800') }}">
                                                 {{ $prestataire->statut }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('prestataires.show', $prestataire) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Voir</a>
-                                            <a href="{{ route('prestataires.edit', $prestataire) }}" class="text-yellow-600 hover:text-yellow-900 mr-3">Modifier</a>
+                                            <a href="{{ route('prestataires.show', $prestataire) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Voir">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('prestataires.edit', $prestataire) }}" class="text-yellow-600 hover:text-yellow-900 mr-3" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                             <form action="{{ route('prestataires.destroy', $prestataire) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-900" 
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prestataire ?')">
-                                                    Supprimer
+                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prestataire ?')"
+                                                        title="Supprimer">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>

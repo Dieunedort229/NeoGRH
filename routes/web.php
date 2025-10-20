@@ -31,7 +31,7 @@ Route::get('/test-form', function () {
     return view('test-form');
 })->middleware(['auth', 'verified'])->name('test-form');
 
-// Routes protégées par SuperAdmin pour la gestion NGO
+// Routes protégées par SuperAdmin pour la gestion 
 Route::middleware(['auth', 'ensure.superadmin'])->group(function () {
     // Routes Personnel
     Route::get('/personnel', [App\Http\Controllers\PersonnelController::class, 'index'])->name('personnel.index');
@@ -41,6 +41,18 @@ Route::middleware(['auth', 'ensure.superadmin'])->group(function () {
     Route::get('/personnel/{personnel}/edit', [App\Http\Controllers\PersonnelController::class, 'edit'])->name('personnel.edit');
     Route::put('/personnel/{personnel}', [App\Http\Controllers\PersonnelController::class, 'update'])->name('personnel.update');
     Route::delete('/personnel/{personnel}', [App\Http\Controllers\PersonnelController::class, 'destroy'])->name('personnel.destroy');
+    
+    // Routes Gestion des Utilisateurs (comptes d'accès)
+    Route::get('/users', [App\Http\Controllers\UserManagementController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [App\Http\Controllers\UserManagementController::class, 'create'])->name('users.create');
+    Route::post('/users', [App\Http\Controllers\UserManagementController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [App\Http\Controllers\UserManagementController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [App\Http\Controllers\UserManagementController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\UserManagementController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [App\Http\Controllers\UserManagementController::class, 'destroy'])->name('users.destroy');
+    
+    // Routes Logs Système (SuperAdmin uniquement)
+    Route::get('/admin/logs', [App\Http\Controllers\LogController::class, 'index'])->name('admin.logs.index');
     
     // Routes Projets
     Route::get('/projets', [App\Http\Controllers\ProjetController::class, 'index'])->name('projets.index');

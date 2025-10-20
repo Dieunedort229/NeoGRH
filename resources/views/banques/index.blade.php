@@ -50,15 +50,15 @@
                                 @forelse($banques as $banque)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ $banque->nom }}</div>
-                                            @if($banque->code_banque)
-                                                <div class="text-sm text-gray-500">Code: {{ $banque->code_banque }}</div>
+                                            <div class="text-sm font-medium text-gray-900">{{ $banque->nom_banque }}</div>
+                                            @if($banque->contact_banque)
+                                                <div class="text-sm text-gray-500">Contact: {{ $banque->contact_banque }}</div>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{ $banque->numero_compte }}</div>
-                                            @if($banque->iban)
-                                                <div class="text-sm text-gray-500">IBAN: {{ $banque->iban }}</div>
+                                            @if($banque->responsable_compte)
+                                                <div class="text-sm text-gray-500">Responsable: {{ $banque->responsable_compte }}</div>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -79,14 +79,19 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('banques.show', $banque) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Voir</a>
-                                            <a href="{{ route('banques.edit', $banque) }}" class="text-yellow-600 hover:text-yellow-900 mr-3">Modifier</a>
+                                            <a href="{{ route('banques.show', $banque) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Voir">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('banques.edit', $banque) }}" class="text-yellow-600 hover:text-yellow-900 mr-3" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                             <form action="{{ route('banques.destroy', $banque) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-900" 
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce compte ?')">
-                                                    Supprimer
+                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce compte ?')"
+                                                        title="Supprimer">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>

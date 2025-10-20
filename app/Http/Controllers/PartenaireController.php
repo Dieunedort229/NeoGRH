@@ -23,21 +23,18 @@ class PartenaireController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required|string|max:255',
-            'type_partenaire' => 'required|in:Bailleur,Partenaire technique,Gouvernement,ONG,Entreprise privée,Autre',
-            'secteur_activite' => 'nullable|string|max:255',
-            'contact_nom' => 'required|string|max:255',
-            'contact_email' => 'required|email',
-            'contact_telephone' => 'required|string|max:20',
-            'adresse' => 'required|string',
-            'ville' => 'required|string|max:255',
-            'pays' => 'required|string|max:255',
+            'nom_organisation' => 'required|string|max:255',
+            'type_partenaire' => 'required|in:Bailleur,Partenaire technique,Partenaire local,Gouvernement',
+            'contact_principal' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string',
             'site_web' => 'nullable|url',
-            'date_partenariat' => 'required|date',
-            'type_collaboration' => 'nullable|string|max:255',
-            'budget_alloue' => 'nullable|numeric|min:0',
-            'devise' => 'nullable|string|max:10',
-            'statut' => 'required|in:Actif,Inactif,Suspendu,Terminé',
+            'domaine_intervention' => 'nullable|string',
+            'date_debut_partenariat' => 'nullable|date',
+            'date_fin_partenariat' => 'nullable|date|after_or_equal:date_debut_partenariat',
+            'accords_signes' => 'nullable|string',
+            'statut' => 'required|in:Actif,Inactif,En négociation',
             'notes' => 'nullable|string'
         ]);
 
@@ -66,21 +63,18 @@ class PartenaireController extends Controller
     public function update(Request $request, Partenaire $partenaire)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required|string|max:255',
-            'type_partenaire' => 'required|in:Bailleur,Partenaire technique,Gouvernement,ONG,Entreprise privée,Autre',
-            'secteur_activite' => 'nullable|string|max:255',
-            'contact_nom' => 'required|string|max:255',
-            'contact_email' => 'required|email',
-            'contact_telephone' => 'required|string|max:20',
-            'adresse' => 'required|string',
-            'ville' => 'required|string|max:255',
-            'pays' => 'required|string|max:255',
+            'nom_organisation' => 'required|string|max:255',
+            'type_partenaire' => 'required|in:Bailleur,Partenaire technique,Partenaire local,Gouvernement',
+            'contact_principal' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string',
             'site_web' => 'nullable|url',
-            'date_partenariat' => 'required|date',
-            'type_collaboration' => 'nullable|string|max:255',
-            'budget_alloue' => 'nullable|numeric|min:0',
-            'devise' => 'nullable|string|max:10',
-            'statut' => 'required|in:Actif,Inactif,Suspendu,Terminé',
+            'domaine_intervention' => 'nullable|string',
+            'date_debut_partenariat' => 'nullable|date',
+            'date_fin_partenariat' => 'nullable|date|after_or_equal:date_debut_partenariat',
+            'accords_signes' => 'nullable|string',
+            'statut' => 'required|in:Actif,Inactif,En négociation',
             'notes' => 'nullable|string'
         ]);
 

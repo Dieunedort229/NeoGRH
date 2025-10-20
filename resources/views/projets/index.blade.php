@@ -54,11 +54,11 @@
                                             <div class="text-sm text-gray-500">{{ Str::limit($projet->description, 50) }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ number_format($projet->budget, 2) }} {{ $projet->devise }}</div>
+                                            <div class="text-sm text-gray-900">{{ number_format($projet->budget_total, 2) }} FCFA</div>
                                             <div class="text-sm text-gray-500">Responsable: {{ $projet->responsable }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ number_format($projet->budget_utilise ?? 0, 2) }} {{ $projet->devise }}</div>
+                                            <div class="text-sm text-gray-900">{{ number_format($projet->budget_utilise ?? 0, 2) }} FCFA</div>
                                             <div class="w-full bg-gray-200 rounded-full h-2">
                                                 <div class="bg-blue-600 h-2 rounded-full" style="width: {{ $projet->pourcentage_utilise }}%"></div>
                                             </div>
@@ -84,14 +84,19 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('projets.show', $projet) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Voir</a>
-                                            <a href="{{ route('projets.edit', $projet) }}" class="text-yellow-600 hover:text-yellow-900 mr-3">Modifier</a>
+                                            <a href="{{ route('projets.show', $projet) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Voir">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('projets.edit', $projet) }}" class="text-yellow-600 hover:text-yellow-900 mr-3" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                             <form action="{{ route('projets.destroy', $projet) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-900" 
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
-                                                    Supprimer
+                                                <button type="submit" class="text-red-600 hover:text-red-900"
+                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')"
+                                                        title="Supprimer">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>

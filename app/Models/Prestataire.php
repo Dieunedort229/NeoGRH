@@ -8,24 +8,23 @@ class Prestataire extends Model
 {
     protected $fillable = [
         'nom',
-        'type_service',
-        'contact_nom',
-        'contact_email',
-        'contact_telephone',
+        'prenom',
+        'entreprise',
+        'email',
+        'telephone',
         'adresse',
-        'ville',
-        'pays',
-        'numero_registre_commerce',
-        'numero_fiscal',
         'specialite',
+        'type_prestation',
         'tarif_journalier',
-        'devise',
+        'competences',
         'statut',
+        'date_debut_collaboration',
         'notes'
     ];
 
     protected $casts = [
-        'tarif_journalier' => 'decimal:2'
+        'tarif_journalier' => 'decimal:2',
+        'date_debut_collaboration' => 'date'
     ];
 
     public function projets()
@@ -35,6 +34,6 @@ class Prestataire extends Model
 
     public function getTarifFormatAttribute()
     {
-        return number_format($this->tarif_journalier, 2) . ' ' . $this->devise;
+        return $this->tarif_journalier ? number_format($this->tarif_journalier, 2) . ' €' : 'Non défini';
     }
 }

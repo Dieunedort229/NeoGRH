@@ -57,17 +57,17 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-500">Budget total</label>
-                            <p class="mt-1 text-lg font-semibold text-gray-900">{{ number_format($projet->budget, 2) }} {{ $projet->devise }}</p>
+                            <p class="mt-1 text-lg font-semibold text-gray-900">{{ number_format($projet->budget_total, 2) }} FCFA</p>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-500">Budget utilisé</label>
-                            <p class="mt-1 text-lg font-semibold text-gray-900">{{ number_format($projet->budget_utilise ?? 0, 2) }} {{ $projet->devise }}</p>
+                            <p class="mt-1 text-lg font-semibold text-gray-900">{{ number_format($projet->budget_utilise ?? 0, 2) }} FCFA</p>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-500">Budget restant</label>
-                            <p class="mt-1 text-lg font-semibold text-green-600">{{ number_format($projet->budget_restant, 2) }} {{ $projet->devise }}</p>
+                            <p class="mt-1 text-lg font-semibold text-green-600">{{ number_format($projet->budget_restant, 2) }} FCFA</p>
                         </div>
 
                         <div>
@@ -111,19 +111,7 @@
                         </div>
                         @endif
 
-                        @if($projet->localisation)
-                        <div>
-                            <label class="block text-sm font-medium text-gray-500">Localisation</label>
-                            <p class="mt-1 text-sm text-gray-900">{{ $projet->localisation }}</p>
-                        </div>
-                        @endif
 
-                        @if($projet->beneficiaires)
-                        <div>
-                            <label class="block text-sm font-medium text-gray-500">Nombre de bénéficiaires</label>
-                            <p class="mt-1 text-sm text-gray-900">{{ number_format($projet->beneficiaires) }}</p>
-                        </div>
-                        @endif
 
                         @if($projet->objectifs)
                         <div class="col-span-2 mt-4">
@@ -132,12 +120,7 @@
                         </div>
                         @endif
 
-                        @if($projet->notes)
-                        <div class="col-span-2 mt-4">
-                            <label class="block text-sm font-medium text-gray-500">Notes</label>
-                            <p class="mt-1 text-sm text-gray-900">{{ $projet->notes }}</p>
-                        </div>
-                        @endif
+
                     </div>
 
                     <!-- Actions -->

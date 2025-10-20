@@ -24,19 +24,17 @@ class PrestataireController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
-            'type_service' => 'required|string|max:255',
-            'contact_nom' => 'required|string|max:255',
-            'contact_email' => 'required|email',
-            'contact_telephone' => 'required|string|max:20',
-            'adresse' => 'required|string',
-            'ville' => 'required|string|max:255',
-            'pays' => 'required|string|max:255',
-            'numero_registre_commerce' => 'nullable|string|max:100',
-            'numero_fiscal' => 'nullable|string|max:100',
-            'specialite' => 'nullable|string',
+            'prenom' => 'nullable|string|max:255',
+            'entreprise' => 'nullable|string|max:255',
+            'email' => 'nullable|email|unique:prestataires,email',
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string',
+            'specialite' => 'required|string|max:255',
+            'type_prestation' => 'required|in:Consultant,Fournisseur,Service',
             'tarif_journalier' => 'nullable|numeric|min:0',
-            'devise' => 'nullable|string|max:10',
-            'statut' => 'required|in:Actif,Inactif,Suspendu',
+            'competences' => 'nullable|string',
+            'statut' => 'required|in:Actif,Inactif,Blacklisté',
+            'date_debut_collaboration' => 'nullable|date',
             'notes' => 'nullable|string'
         ]);
 
@@ -66,19 +64,17 @@ class PrestataireController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
-            'type_service' => 'required|string|max:255',
-            'contact_nom' => 'required|string|max:255',
-            'contact_email' => 'required|email',
-            'contact_telephone' => 'required|string|max:20',
-            'adresse' => 'required|string',
-            'ville' => 'required|string|max:255',
-            'pays' => 'required|string|max:255',
-            'numero_registre_commerce' => 'nullable|string|max:100',
-            'numero_fiscal' => 'nullable|string|max:100',
-            'specialite' => 'nullable|string',
+            'prenom' => 'nullable|string|max:255',
+            'entreprise' => 'nullable|string|max:255',
+            'email' => 'nullable|email|unique:prestataires,email,' . $prestataire->id,
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string',
+            'specialite' => 'required|string|max:255',
+            'type_prestation' => 'required|in:Consultant,Fournisseur,Service',
             'tarif_journalier' => 'nullable|numeric|min:0',
-            'devise' => 'nullable|string|max:10',
-            'statut' => 'required|in:Actif,Inactif,Suspendu',
+            'competences' => 'nullable|string',
+            'statut' => 'required|in:Actif,Inactif,Blacklisté',
+            'date_debut_collaboration' => 'nullable|date',
             'notes' => 'nullable|string'
         ]);
 

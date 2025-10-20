@@ -13,17 +13,14 @@
         
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        
-        <!-- Animate.css pour les animations -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/date-fields.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
             <x-sidebar />
-            <div class="ml-0 lg:ml-64 flex flex-col min-h-screen transition-all duration-300">
+            <div class="ml-0 lg:ml-64 flex flex-col min-h-screen flex-1 transition-all duration-300 overflow-x-hidden">
                 @include('layouts.navigation')
 
                 <!-- Page Heading -->
@@ -36,7 +33,7 @@
                 @endisset
 
                 <!-- Page Content -->
-                <main class="flex-1">
+                <main class="flex-1 overflow-x-hidden">
                     {{-- Le composant AppLayout passe son contenu via $slot, pas via une section 'content'. --}}
                     {{ $slot }}
                 </main>
