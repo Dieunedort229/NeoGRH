@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Optimisations pour la sidebar et la réactivité */
+@layer components {
+    /* Sidebar uniformisée */
+    .sidebar-item {
+        @apply flex items-center px-4 py-3 rounded-lg text-white transition-colors duration-150;
+        height: 48px; /* h-12 fixe pour tous les éléments */
+    }
+    
+    .sidebar-item:hover {
+        @apply bg-blue-500 text-white;
+    }
+    
+    .sidebar-item:focus {
+        @apply bg-blue-400 outline-none;
+    }
+    
+    .sidebar-item.active {
+        @apply bg-blue-700;
+    }
+    
+    /* Sous-menus du Personnel */
+    .sidebar-submenu-item {
+        @apply flex items-center px-4 py-2 rounded-lg text-white/80 transition-colors duration-150 text-sm;
+        height: 40px; /* h-10 pour les sous-éléments */
+    }
+    
+    .sidebar-submenu-item:hover {
+        @apply bg-blue-500 text-white;
+    }
+    
+    /* Optimisation des boutons - réactivité immédiate */
+    .btn-reactive {
+        @apply transition-colors duration-150;
+        /* Suppression des transform et des effets de scale pour éviter les double-clics */
+    }
+    
+    /* Tableaux uniformisés */
+    .table-actions {
+        @apply flex items-center space-x-2;
+    }
+    
+    .table-actions a,
+    .table-actions button {
+        @apply transition-colors duration-150;
+        /* Actions réactives sans animations gênantes */
+    }
+}
